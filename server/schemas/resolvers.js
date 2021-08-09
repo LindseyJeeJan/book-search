@@ -4,24 +4,11 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        users: async () => {
-            return User.find().populate('savedBooks');
-        },
-        user: async (parent, { _id }) => {
-            return User.findOne({ username }).populate('savedBooks');
-        },
-        books: async (parent, { _id }) => {
-            const params = _id ? { _id } : {};
-            return Book.find(params);
-        },
-        book: async (parent, { _id }) => {
-            return Book.findOne({ _id: bookId });
-        },
-         me: async (parent, args, context) => {
+        me: async (parent, args, context) => {
         if (context.user) {
-            return User.findOne({ _id: context.user._id }).populate('savedBooks');
+            return User.findOne({ _id: context.user._id });
         }
-        throw new AuthenticationError('You need to be logged in!');
+        throw new AuthenticationError('You need to be logged in.');
         },
     },
     Mutation: {
@@ -47,13 +34,27 @@ const resolvers = {
 
             return { token, user };
             },
-        saveBook: async (parent, { userId, bookId }) => {
-        const saveBook = await User.findOneAndUpdate(
-            { _id: userId },
-            { $addToSet: {savedBooks: book._id}},
-            { new: true }
-        );
-        return vote;
+        saveBook: async (parent, { bookData }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { savedBooks: bookData }},
+                    { new: true }
+                );
+                return updatedUser;
+            }
+            throw new AuthenticationError('You need to be logged in.');
+        },
+        removeBook: async (parent, { bookId }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { savedBooks: bookId }},
+                    { new: true }
+                );
+                return updatedUser;
+            }
+            throw new AuthenticationError('You need to be logged in.');
         },
     },
 };
