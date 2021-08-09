@@ -48,41 +48,42 @@ const LoginForm = () => {
 
   return (
   <React.Fragment>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="p-3">
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
+          Error: Login credentials are incorrect.
         </Alert>
         <Form.Group>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Your email'
+            placeholder='Enter your email'
             name='email'
             onChange={handleInputChange}
             value={userFormData.email}
             required
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid'>Error: Email is required.</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
           <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control
             type='password'
-            placeholder='Your password'
+            placeholder='Enter your password'
             name='password'
             onChange={handleInputChange}
             value={userFormData.password}
             required
           />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid'>Error: Password is required.</Form.Control.Feedback>
         </Form.Group>
-        <Button
-          disabled={!(userFormData.email && userFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
+          <Button
+            disabled={!(userFormData.email && userFormData.password)}
+            type='submit'
+            variant='success'>
+            Submit
+          </Button>
+        
       </Form>
     </React.Fragment>
   );

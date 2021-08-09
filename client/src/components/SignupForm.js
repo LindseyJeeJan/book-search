@@ -32,15 +32,6 @@ const SignupForm = () => {
     }
 
     try {
-      // const response = await createUser(userFormData);
-
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-
-      // const { token, user } = await response.json();
-
-      // 
       const { data } = await addUser({
         variables: {...userFormData},
       });
@@ -60,49 +51,49 @@ const SignupForm = () => {
   return (
     <React.Fragment>
       {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="p-3">
         {/* show alert if server response is bad */}
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
+          Error: An error occurred during signup.
         </Alert>
 
         <Form.Group>
           <Form.Label htmlFor='username'>Username</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Your username'
+            placeholder='Enter username'
             name='username'
             onChange={handleInputChange}
             value={userFormData.username}
             required
           />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid'>Error: Username is required</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
             type='email'
-            placeholder='Your email address'
+            placeholder='Enter email address'
             name='email'
             onChange={handleInputChange}
             value={userFormData.email}
             required
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid'>Error: Email is required</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
           <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control
             type='password'
-            placeholder='Your password'
+            placeholder='Enter password'
             name='password'
             onChange={handleInputChange}
             value={userFormData.password}
             required
           />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid'>Error: Password is required</Form.Control.Feedback>
         </Form.Group>
         <Button
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
