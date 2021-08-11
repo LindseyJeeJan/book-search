@@ -47,7 +47,7 @@ const LoginForm = () => {
   };
 
   return (
-  <React.Fragment>
+  <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="p-3">
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Error: Login credentials are incorrect.
@@ -85,7 +85,7 @@ const LoginForm = () => {
           </Button>
         
       </Form>
-    </React.Fragment>
+    </>
   );
 };
 

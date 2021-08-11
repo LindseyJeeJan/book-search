@@ -70,10 +70,10 @@ const SearchBooks = () => {
     }
 
     try {
-        const { data } =  await saveBook({
-          variables:{ ...bookToSave }
-        });
-        console.log(data);
+          const { data }= await saveBook({
+              variables: { input: bookToSave }
+          });
+          console.log(data);
 
         if (error) {
           throw new Error('something went wrong!');
@@ -89,7 +89,7 @@ const SearchBooks = () => {
     <>
       <Jumbotron fluid className='text-light bg-success'>
         <Container>
-          <h1>Search for Books!</h1>
+          <h1>Search for books!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -135,8 +135,8 @@ const SearchBooks = () => {
                       className='btn-block btn-info'
                       onClick={() => handleSaveBook(book.bookId)}>
                       {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
-                        ? 'This book has already been saved!'
-                        : 'Save this Book!'}
+                        ? 'Book is saved.'
+                        : 'Save this Book'}
                     </Button>
                   )}
                 </Card.Body>

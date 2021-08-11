@@ -35,7 +35,9 @@ const SignupForm = () => {
       const { data } = await addUser({
         variables: {...userFormData},
       });
-      Auth.login(data.login.token);
+
+      Auth.login(data.addUser.token);
+
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -49,7 +51,7 @@ const SignupForm = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       {/* This is needed for the validation functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="p-3">
         {/* show alert if server response is bad */}
@@ -102,7 +104,7 @@ const SignupForm = () => {
           Submit
         </Button>
       </Form>
-    </React.Fragment>
+    </>
   );
 };
 
