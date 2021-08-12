@@ -1,4 +1,3 @@
-// see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
@@ -20,8 +19,8 @@ const LoginForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-
     const form = event.currentTarget;
+
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
@@ -33,7 +32,6 @@ const LoginForm = () => {
       });
 
       Auth.login(data.login.token);
-
     } catch (err) {
       console.error(err);
       setShowAlert(true);
