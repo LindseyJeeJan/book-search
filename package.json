@@ -1,7 +1,7 @@
 {
   "name": "googlebooks-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "application for searching google books API and saving to your account",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -14,10 +14,5 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
-  },
-  "dependencies": {
-    "@apollo/client": "^3.4.7",
-    "dotenv": "^10.0.0",
-    "graphql": "^15.5.1"
   }
 }
