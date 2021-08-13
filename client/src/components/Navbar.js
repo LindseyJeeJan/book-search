@@ -11,7 +11,7 @@ const AppNavbar = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-  <>
+  <React.Fragment>
       <Navbar bg='light' variant='light' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
@@ -71,7 +71,7 @@ const AppNavbar = () => {
           </Modal.Body>
         </Tab.Container>
       </Modal>
-    </>
+    </React.Fragment>
   );
 };
 

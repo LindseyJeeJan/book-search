@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
@@ -9,7 +9,15 @@ const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [login] = useMutation(LOGIN_USER);
+  const [login, { error }] = useMutation(LOGIN_USER);
+
+   useEffect(() => {
+    if (error) {
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+    }
+  }, [error]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -45,8 +53,8 @@ const LoginForm = () => {
   };
 
   return (
-  <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="p-3">
+  <React.Fragment>
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit} className='p-3'>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Error: Login credentials are incorrect.
         </Alert>
@@ -83,7 +91,7 @@ const LoginForm = () => {
           </Button>
         
       </Form>
-    </>
+    </React.Fragment>
   );
 };
 
