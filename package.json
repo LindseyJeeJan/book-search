@@ -14,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/LindseyJeeJan/book-search"
   },
-  "keywords": [],
+  "keywords": ["heroku"],
   "author": "",
   "license": "ISC",
   "devDependencies": {
